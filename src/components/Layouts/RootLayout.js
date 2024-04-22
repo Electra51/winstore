@@ -1,9 +1,10 @@
 import React from "react";
+import Navbar from "../Common/Navbar/Navbar";
 
 const RootLayout = ({ children }) => {
   return (
     <div>
-      <h2>Header</h2>
+      <Navbar />
       <div className="h-[100vh]">{children}</div>
       <h3>Footer</h3>
     </div>

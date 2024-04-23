@@ -1,4 +1,5 @@
 import RootLayout from "@/components/Layouts/RootLayout";
+import Banner from "@/components/Ui/Banner/Banner";
 import Head from "next/head";
 import React from "react";
 
@@ -11,9 +12,9 @@ const HomePage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <div>
-        <h1 className="text-3xl font-bold text-red-500">Homepage</h1>
-      </div> */}
+      <div>
+        <Banner />
+      </div>
     </>
   );
 };

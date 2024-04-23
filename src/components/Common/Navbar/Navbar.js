@@ -168,7 +168,11 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className="lg:flex hidden h-[50px] bg-[#0E3B3E]">
+      <div
+        className="lg:flex hidden h-[50px] bg-[#0E3B3E]"
+        style={{
+          boxShadow: "0px 4px 9px 0px #00000063",
+        }}>
         <div className="w-[1400px] mx-auto flex justify-between items-center">
           <div className="flex justify-normal items-center gap-9 text-white h-[50px]">
             <div className="flex justify-normal items-center gap-[12px]">

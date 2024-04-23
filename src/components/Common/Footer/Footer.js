@@ -8,7 +8,7 @@ import img3 from "../../../assets/footerImage/3.png";
 import img4 from "../../../assets/footerImage/4.png";
 const Footer = () => {
   return (
-    <div>
+    <div className="mt-[200px]">
       <div className="h-[407px] bg-[#393939]">
         <div className="w-[1205px] mx-auto mt-[58px]">
           <div className="flex justify-between items-start ">

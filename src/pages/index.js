@@ -1,5 +1,6 @@
 import RootLayout from "@/components/Layouts/RootLayout";
 import Banner from "@/components/Ui/Banner/Banner";
+import NewArrivals from "@/components/Ui/NewArrivals/NewArrivals";
 import ProductCategory from "@/components/Ui/ProductCategory/ProductCategory";
 import Head from "next/head";
 import React from "react";
@@ -16,6 +17,7 @@ const HomePage = () => {
       <div>
         <Banner />
         <ProductCategory />
+        <NewArrivals />
       </div>
     </>
   );

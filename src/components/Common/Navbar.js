@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import logo from "../../../assets/logo.png";
+import logo from "../../assets/logo.png";
 import Image from "next/image";
 import { FiSearch } from "react-icons/fi";
 import { ImHeadphones } from "react-icons/im";
 import { LuUser } from "react-icons/lu";
-import cartLogo from "../../../assets/cart.png";
+import cartLogo from "../../assets/cart.png";
 import { MdMenu } from "react-icons/md";
 import {
   FaRegHeart,
@@ -14,7 +14,8 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import SocialIcon from "../SocialIcon";
+import SocialIcon from "./SocialIcon";
+import { useGetCategoryQuery } from "@/Redux/api/api";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -22,6 +23,8 @@ const Navbar = () => {
     console.log("hi");
     setIsDrawerOpen(!isDrawerOpen);
   };
+
+  const { data, isError, isLoading, error } = useGetCategoryQuery();
 
   return (
     <div>
@@ -127,9 +130,12 @@ const Navbar = () => {
                 <select
                   className="w-[157px] h-[39px] rounded-l-md px-2"
                   defaultValue="placeholder">
-                  <option>All categories</option>
-                  <option>hello</option>
-                  <option>hello</option>
+                  {data &&
+                    data.map((category, index) => (
+                      <option className="text-black" key={index}>
+                        {category}
+                      </option>
+                    ))}
                 </select>
                 <input
                   type="text"
@@ -176,9 +182,27 @@ const Navbar = () => {
         }}>
         <div className="w-[1400px] mx-auto flex justify-between items-center">
           <div className="flex justify-normal items-center gap-9 text-white h-[50px]">
-            <div className="flex justify-normal items-center gap-[12px]">
-              <MdMenu className="text-[24px]" />
-              <p className="text-[17px]">Brouse By Category</p>
+            <div className="flex justify-normal items-center gap-[12px] relative">
+              <MdMenu
+                className="text-[24px] cursor-pointer"
+                onClick={(e) => {
+                  const selectElem = e.currentTarget.nextElementSibling;
+                  selectElem.focus();
+                  selectElem.click();
+                }}
+              />
+              <p className="text-[17px]">Browse By Category</p>
+              <select
+                className="w-[127px] h-[39px] rounded-l-md px-2 absolute top-0 left-0 opacity-0 cursor-pointer"
+                defaultValue="placeholder"
+                tabIndex="-1">
+                {data &&
+                  data.map((category, index) => (
+                    <option className="text-black" key={index}>
+                      {category}
+                    </option>
+                  ))}
+              </select>
             </div>
             <p className="text-[14px]">Home</p>
             <p className="text-[14px]">Easy Monthly Installments</p>

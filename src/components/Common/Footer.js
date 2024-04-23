@@ -1,17 +1,17 @@
 import React from "react";
-import logo from "../../../assets/logo.png";
+import logo from "../../assets/logo.png";
 import Image from "next/image";
-import SocialIcon from "../SocialIcon";
-import img1 from "../../../assets/footerImage/1.png";
-import img2 from "../../../assets/footerImage/2.png";
-import img3 from "../../../assets/footerImage/3.png";
-import img4 from "../../../assets/footerImage/4.png";
+import SocialIcon from "./SocialIcon";
+import img1 from "../../assets/footerImage/1.png";
+import img2 from "../../assets/footerImage/2.png";
+import img3 from "../../assets/footerImage/3.png";
+import img4 from "../../assets/footerImage/4.png";
 const Footer = () => {
   return (
-    <div className="mt-[200px]">
-      <div className="h-[407px] bg-[#393939]">
-        <div className="w-[1205px] mx-auto mt-[58px]">
-          <div className="flex justify-between items-start ">
+    <div className="">
+      <div className="lg:h-[407px] bg-[#393939]">
+        <div className="w-[389px] lg:w-[1205px] mx-auto pt-[58px] px-10">
+          <div className="flex lg:flex-row flex-col justify-between items-start lg:gap-y-0 gap-y-7">
             <div>
               <Image src={logo} alt="" />
               <p className="text-[18px] font-normal text-[#00CAD7] leading-[17px] mt-[14px]">
@@ -71,7 +71,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-end items-center gap-[11px] mt-8">
+          <div className="flex justify-start lg:justify-end items-center gap-[11px] mt-8 pb-2">
             <Image src={img1} alt="" />
             <Image src={img2} alt="" />
             <Image src={img3} alt="" />
@@ -80,7 +80,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="h-[59px] flex justify-normal items-center bg-[#161616] font-normal text-[18px] leading-[17px] text-white">
-        <p className="w-[1205px] mx-auto">
+        <p className="w-[390px] lg:w-[1205px] mx-auto text-center lg:text-start">
           © 2021 Winstore. All Rights Reserved.
         </p>
       </div>

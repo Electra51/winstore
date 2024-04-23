@@ -7,9 +7,10 @@ import img2 from "../../../assets/categoryImage/category2.png";
 import img3 from "../../../assets/categoryImage/category3.png";
 import img4 from "../../../assets/categoryImage/category4.png";
 import Image from "next/image";
+import { useGetCategoryQuery } from "@/Redux/api/api";
 const ProductCategory = () => {
   var settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -17,9 +18,15 @@ const ProductCategory = () => {
     autoplaySpeed: 2000,
     pauseOnHover: true,
   };
+  const { data, isError, isLoading, error } = useGetCategoryQuery();
+  console.log("data", data);
   return (
-    <div>
-      <Slider {...settings} className="!w-[1500px] !mx-[auto] !px-[100px]">
+    <div
+      style={{
+        background:
+          "linear-gradient(180deg, #F3EDC9 0%, rgba(255, 255, 255, 0) 100%)",
+      }}>
+      <Slider {...settings} className="!w-[1400px] !mx-[auto] !px-[55px] py-6">
         <div>
           <div className="h-[199px] w-[272px] relative">
             <Image src={img1} className="h-full w-full object-fill " />
@@ -32,7 +39,7 @@ const ProductCategory = () => {
                 </p>
                 <p className="text-[21px] text-[#14B1F0] font-normal">Shop</p>
               </div>
-              <div className="up-arrow "></div>
+              <div className="up-arrow"></div>
             </div>
           </div>
         </div>
@@ -98,6 +105,7 @@ const ProductCategory = () => {
           margin: 2rem;
         }
       `}</style>
+      <div className="w-[1270px] h-[2px] bg-[#0000002B] mx-auto mt-[36px]"></div>
     </div>
   );
 };

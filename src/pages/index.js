@@ -1,11 +1,15 @@
+import { useGetProductsQuery } from "@/Redux/api/api";
 import RootLayout from "@/components/Layouts/RootLayout";
 import Banner from "@/components/Ui/Banner/Banner";
+import BestDeal from "@/components/Ui/BestDealSection/BestDeal";
 import NewArrivals from "@/components/Ui/NewArrivals/NewArrivals";
 import ProductCategory from "@/components/Ui/ProductCategory/ProductCategory";
 import Head from "next/head";
 import React from "react";
 
 const HomePage = () => {
+  const { data, isLoading, isError, error } = useGetProductsQuery();
+  console.log(data);
   return (
     <>
       <Head>
@@ -14,10 +18,12 @@ const HomePage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <Banner />
+      <div className="">
+        {/* <Banner />
+
         <ProductCategory />
-        <NewArrivals />
+        <NewArrivals arrivalProduct={data} />
+        <BestDeal /> */}
       </div>
     </>
   );

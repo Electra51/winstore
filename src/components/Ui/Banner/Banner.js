@@ -11,7 +11,7 @@ const Banner = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const sliderRef = useRef(null);
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,

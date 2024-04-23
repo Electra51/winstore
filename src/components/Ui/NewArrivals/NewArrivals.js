@@ -1,19 +1,18 @@
-import Card from "@/components/Common/Card/Card";
+import Card from "@/components/Common/Card";
+import SectionHeader from "@/components/Common/SectionHeader";
 import React from "react";
 
-const NewArrivals = () => {
+const NewArrivals = ({ arrivalProduct }) => {
+  console.log("arrivalProduct", arrivalProduct);
   return (
-    <div className="w-[1440px] mx-auto">
-      <p className="text-[28px] font-normal">
-        <span className="text-[#00CAD7]">New</span> Arrivals
-      </p>
-      <div className="grid grid-cols-6 gap-[30px]">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+    <div className="w-[1440px] mx-auto mt-[26px]">
+      <div className="pt-[60px]">
+        <SectionHeader title1={"New"} titile2={"Arrivals"} />
+        <div className="grid grid-cols-6 gap-[30px]">
+          {arrivalProduct?.map((data, i) => {
+            return <Card data={data} key={i} />;
+          })}
+        </div>
       </div>
     </div>
   );

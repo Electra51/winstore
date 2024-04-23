@@ -14,6 +14,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import SocialIcon from "../SocialIcon";
 
 const Navbar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -184,12 +185,7 @@ const Navbar = () => {
             <p className="text-[14px]">Shop by Brands</p>
             <p className="text-[14px]">Become a Vendor</p>
           </div>
-          <div className="flex justify-normal items-center gap-4 text-white">
-            <FaFacebookF className="text-[24px]" />
-            <FaTwitter className="text-[24px]" />
-            <FaLinkedinIn className="text-[24px]" />
-            <FaInstagram className="text-[24px]" />
-          </div>
+          <SocialIcon />
         </div>
       </div>
     </div>

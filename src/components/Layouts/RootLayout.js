@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "../Common/Navbar/Navbar";
+import Footer from "../Common/Footer/Footer";
 
 const RootLayout = ({ children }) => {
   return (
     <div>
       <Navbar />
       <div className="h-[100vh]">{children}</div>
-      <h3>Footer</h3>
+      <Footer />
     </div>
   );
 };

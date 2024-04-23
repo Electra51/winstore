@@ -18,7 +18,7 @@ const Banner = () => {
     slidesToScroll: 1,
     customPaging: (i) => <div className="bar-indicator"></div>,
     afterChange: (currentSlide) => {
-      setActiveSlide(currentSlide); // Update active slide after change
+      setActiveSlide(currentSlide);
     },
   };
   const goToSlide = (index) => {
@@ -31,7 +31,7 @@ const Banner = () => {
       <Slider {...settings} ref={sliderRef}>
         <div>
           <div className="relative">
-            <div className="w-[420px] p-2 absolute top-16 left-60">
+            <div className="w-[460px] p-2 absolute top-16 left-60">
               <p className="text-[57px] font-normal leading-[53px]">
                 Shop{" "}
                 <span className="text-[#0AAEB9]">Computer & experience </span>

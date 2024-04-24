@@ -6,7 +6,6 @@ const Card = ({ data }) => {
     <div className="w-[186px] h-[287px] border border-[#00000021] p-[14px]">
       <div>
         <p className="font-normal text-[12px]">{data?.category}</p>
-        {/* <p className="text-[#034E53] text-[15px] mt-[3px]">{data?.title}</p> */}
         {data?.title?.length > 12 ? (
           <p className="text-[#034E53] text-[15px] mt-[3px]">
             {data?.title.slice(0, 12) + "..."}

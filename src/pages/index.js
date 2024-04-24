@@ -23,7 +23,7 @@ const HomePage = () => {
 
         <ProductCategory />
         <NewArrivals arrivalProduct={data} />
-        {/* <BestDeal /> */}
+        <BestDeal />
       </div>
     </>
   );

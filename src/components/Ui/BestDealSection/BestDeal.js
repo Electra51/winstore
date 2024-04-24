@@ -1,190 +1,263 @@
 import SectionHeader from "@/components/Common/SectionHeader";
 import Image from "next/image";
-import React from "react";
-import { BiSolidLeftArrow } from "react-icons/bi";
-import { BiSolidRightArrow } from "react-icons/bi";
-import img1 from "../../../assets/bestImage/1.png";
+import React, { useState } from "react";
 import img2 from "../../../assets/hello.png";
-import img3 from "../../../assets/2.png";
-import img4 from "../../../assets/4.png";
-import img5 from "../../../assets/3.png";
 import SpecialOffer from "@/components/Common/SpecialOffer";
+import {
+  useGetCategoryQuery,
+  useGetProductsByCategoryQuery,
+} from "@/Redux/api/api";
+import { IoMdStar } from "react-icons/io";
+
 const BestDeal = () => {
+  const [activeTab, setActiveTab] = useState("electronics");
+
+  const { data: categories } = useGetCategoryQuery();
+
+  const { data: products, isLoading } =
+    useGetProductsByCategoryQuery(activeTab);
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
   return (
-    <div className="w-[1400px] mx-auto">
-      <div className="flex justify-between items-center">
+    <div className="w-[1400px] mx-auto mt-[80px] pb-[70px]">
+      <div className="flex justify-between items-center mb-[20px]">
         <SectionHeader title1={"Best"} titile2={"Deals"} />
         <div className="flex justify-normal items-center gap-6">
           <div className="flex justify-normal items-center gap-5">
-            <p className="text-[19px] font-normal leading-[56px] cursor-pointer">
-              Kitchen Appliances
-            </p>
-            <p className="text-[19px] font-normal leading-[56px] cursor-pointer">
-              Consoles
-            </p>
-            <p className="text-[19px] font-normal leading-[56px] cursor-pointer">
-              TV & Videos
-            </p>
-            <p className="text-[19px] font-normal leading-[56px] cursor-pointer">
-              Cell Phones
-            </p>
-            <p className="text-[19px] font-normal leading-[56px] cursor-pointer">
-              Grocery
-            </p>
-          </div>
-          <div className="flex justify-normal items-center gap-1">
-            <BiSolidLeftArrow />
-            <BiSolidRightArrow />
+            {categories?.map((tab) => (
+              <p
+                key={tab}
+                className={`text-[19px] font-normal leading-[56px] cursor-pointer ${
+                  activeTab === tab ? "border-b-2 border-red-500" : ""
+                }`}
+                onClick={() => handleTabClick(tab)}>
+                {tab}
+              </p>
+            ))}
           </div>
         </div>
       </div>
-      <div className="grid grid-rows-1 grid-flow-col gap-2">
-        <div className=" space-y-4">
-          <div className="w-[414px] h-[286px] border border-[#0000001C] grid grid-cols-2 p-6 gap-y-5">
-            <div className="">
-              <p className="text-[19px] font-normal text-black">
-                Nintendo Switch{" "}
-              </p>
-              <p className="text-[19px] font-normal text-black">Console</p>
-              <p className="text-[20px] font-normal text-[#00CAD7]">
-                Rs.65,208{" "}
-              </p>
-              <p className="text-[16px] font-normal text-black">
-                Rs.<span className=" line-through">66,000</span>
-              </p>
-            </div>
-
-            <SpecialOffer color="#00CAD7" />
-
+      <div className="grid grid-cols-3 gap-4">
+        {!isLoading &&
+          products?.map((product, index) => (
             <div
-              className="w-[137px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center "
-              style={{
-                background: "linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)",
-              }}>
-              Save <br /> 10%
-            </div>
-            <div className="w-[192px] h-[120px]">
-              <Image src={img1} alt="" className="h-full w-full object-fill" />
-            </div>
-          </div>
-          <div className="w-[414px] h-[286px] border border-[#0000001C] grid grid-cols-2 p-6 gap-y-5">
-            <SpecialOffer color="#c93c2d" />
+              key={index}
+              className={`space-y-3 ${index === 1 ? "row-span-2" : ""}`}>
+              <div
+                className={`w-[414px] border border-[#0000001C] ${
+                  index === 1 ? "h-[588px]" : "h-[286px]"
+                }`}>
+                {index === 3 ? (
+                  <div className="grid grid-cols-2 gap-y-4 p-5">
+                    <SpecialOffer
+                      color={
+                        index === 1 || index === 3
+                          ? "#c93c2d"
+                          : index === 2
+                          ? "#214e54"
+                          : "#00CAD7"
+                      }
+                    />
+                    <div
+                      className="w-[90px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center rounded-full"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #EE9CA7 0%, #FFDDE1 100%)",
+                      }}>
+                      Save <br /> 10%
+                    </div>
+                    <div className="">
+                      {product?.title?.length > 16 ? (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title.slice(0, 16) + "..."}
+                        </p>
+                      ) : (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title}
+                        </p>
+                      )}
+                      <p className="text-[20px] font-normal text-[#00CAD7]">
+                        Rs.{product?.price}
+                      </p>
+                      <div className="flex justify-normal items-center font-normal text-black">
+                        <IoMdStar className="text-xl text-orange-500" />
+                        <p className="text-[14px]">{product?.rating?.rate} </p>
+                        <span className="text-[14px] pl-0.5">
+                          ({product?.rating?.count} reveiws)
+                        </span>
+                      </div>
+                    </div>
 
-            <div
-              className="w-[90px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center rounded-full"
-              style={{
-                background: "linear-gradient(90deg, #EE9CA7 0%, #FFDDE1 100%)",
-              }}>
-              Save <br /> 10%
-            </div>
-            <div className="">
-              <p className="text-[19px] font-normal text-black">
-                Nintendo Switch{" "}
-              </p>
-              <p className="text-[19px] font-normal text-black">Console</p>
-              <p className="text-[20px] font-normal text-red-500">Rs.65,208 </p>
-              <p className="text-[16px] font-normal text-black">
-                Rs.<span className=" line-through">66,000</span>
-              </p>
-              <p className="text-[19px] font-normal text-[#00CAD7]">
-                Already Sold: 6{" "}
-              </p>
-              <p className="text-[19px] font-normal text-[#00CAD7]">
-                Available: 30{" "}
-              </p>
-            </div>
-            <div className="w-[192px] h-[120px]">
-              <Image src={img4} alt="" className="h-full w-full object-fill" />
-            </div>
-          </div>
-        </div>
-        <div className="row-span-2">
-          <div className="w-[414px] h-[588px] border border-[#0000001C] grid grid-cols-2 p-6 gap-y-5">
-            <div className="">
-              <p className="text-[19px] font-normal text-black">
-                Nintendo Switch{" "}
-              </p>
-              <p className="text-[19px] font-normal text-black">Console</p>
-              <p className="text-[20px] font-normal text-[#00CAD7]">
-                Rs.65,208{" "}
-              </p>
-              <p className="text-[16px] font-normal text-black">
-                Rs.<span className=" line-through">66,000</span>
-              </p>
-            </div>
+                    <div className="w-[192px] h-[120px]">
+                      <Image
+                        width={192}
+                        height={120}
+                        src={product?.image}
+                        alt=""
+                        className="h-full w-full object-fill"
+                      />
+                    </div>
+                  </div>
+                ) : index === 1 ? (
+                  <div className=" p-5 relative">
+                    <div className="absolute top-8 left-8">
+                      <SpecialOffer
+                        color={
+                          index === 1 || index === 3
+                            ? "#c93c2d"
+                            : index === 2
+                            ? "#214e54"
+                            : "#00CAD7"
+                        }
+                      />
+                    </div>
+                    <div
+                      className="w-[141px] h-[143px] text-[24px] leading-[29px] flex justify-center items-center rounded-full absolute top-8 right-8 text-white"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #FF512F 0%, #DD2476 100%)",
+                      }}>
+                      Save <br /> 10%
+                    </div>
 
-            <SpecialOffer color="#c93c2d" />
-            <div
-              className="w-[137px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center "
-              style={{
-                background: "linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)",
-              }}>
-              Save <br /> 10%
-            </div>
-            <div className="w-[192px] h-[120px]">
-              <Image src={img1} alt="" className="h-full w-full object-fill" />
-            </div>
-          </div>
-        </div>
-        <div className=" space-y-4">
-          <div className="w-[414px] h-[286px] border border-[#0000001C] grid grid-cols-2 p-6 gap-y-5">
-            <div className="">
-              <p className="text-[19px] font-normal text-black">
-                Nintendo Switch{" "}
-              </p>
-              <p className="text-[19px] font-normal text-black">Console</p>
-              <p className="text-[20px] font-normal text-[#00CAD7]">
-                Rs.65,208{" "}
-              </p>
-              <p className="text-[16px] font-normal text-black">
-                Rs.<span className=" line-through">66,000</span>
-              </p>
-            </div>
+                    <div className="w-[371.5px] h-[459px]">
+                      <Image
+                        width={371.5}
+                        height={459}
+                        src={product?.image}
+                        alt=""
+                        className="h-full w-full object-fill"
+                      />
+                    </div>
+                    <div className="">
+                      {product?.title?.length > 16 ? (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title.slice(0, 16) + "..."}
+                        </p>
+                      ) : (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title}
+                        </p>
+                      )}
+                      <p className="text-[20px] font-normal text-[#00CAD7]">
+                        Rs.{product?.price}
+                      </p>
+                      <div className="flex justify-normal items-center font-normal text-black">
+                        <IoMdStar className="text-xl text-orange-500" />
+                        <p className="text-[14px]">{product?.rating?.rate} </p>
+                        <span className="text-[14px] pl-0.5">
+                          ({product?.rating?.count} reveiws)
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ) : index === 4 ? (
+                  <div className="grid grid-cols-2 gap-y-4 p-5 relative">
+                    <SpecialOffer
+                      color={
+                        index === 1 || index === 4
+                          ? "#c93c2d"
+                          : index === 2
+                          ? "#214e54"
+                          : "#00CAD7"
+                      }
+                    />
+                    <div
+                      className="w-[141px] h-[143px] text-[24px] leading-[29px] flex justify-center items-center rounded-full z-10"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #F09819 0%, #EDDE5D 100%)",
+                      }}>
+                      Save <br /> 10%
+                    </div>
+                    <div className="">
+                      {product?.title?.length > 16 ? (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title.slice(0, 16) + "..."}
+                        </p>
+                      ) : (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title}
+                        </p>
+                      )}
+                      <p className="text-[20px] font-normal text-[#00CAD7]">
+                        Rs.{product?.price}
+                      </p>
+                      <div className="flex justify-normal items-center font-normal text-black">
+                        <IoMdStar className="text-xl text-orange-500" />
+                        <p className="text-[14px]">{product?.rating?.rate} </p>
+                        <span className="text-[14px] pl-0.5">
+                          ({product?.rating?.count} reveiws)
+                        </span>
+                      </div>
+                    </div>
 
-            <SpecialOffer color="#214e54" />
-            <div
-              className="w-[137px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center relative"
-              style={{
-                background:
-                  "linear-gradient(180deg, #EECFCC 0%, rgba(238, 207, 204, 0) 100%)",
-              }}>
-              <Image src={img2} alt="" />
-              <p className="absolute top-5 left-5">
-                {" "}
-                Save <br /> 10%
-              </p>
+                    <div className="w-[192px] h-[120px] absolute top-16 left-32 rotate-12">
+                      <Image
+                        width={192}
+                        height={120}
+                        src={product?.image}
+                        alt=""
+                        className="h-full w-full object-fill"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 gap-y-4 p-5">
+                    <div className="">
+                      {product?.title?.length > 16 ? (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title.slice(0, 16) + "..."}
+                        </p>
+                      ) : (
+                        <p className="text-[19px] font-normal text-black">
+                          {product?.title}
+                        </p>
+                      )}
+                      <p className="text-[20px] font-normal text-[#00CAD7]">
+                        Rs.{product?.price}
+                      </p>
+                      <div className="flex justify-normal items-center font-normal text-black">
+                        <IoMdStar className="text-xl text-orange-500" />
+                        <p className="text-[14px]">{product?.rating?.rate} </p>
+                        <span className="text-[14px] pl-0.5">
+                          ({product?.rating?.count} reveiws)
+                        </span>
+                      </div>
+                    </div>
+                    <SpecialOffer
+                      color={
+                        index === 1 || index === 3
+                          ? "#c93c2d"
+                          : index === 2
+                          ? "#214e54"
+                          : "#00CAD7"
+                      }
+                    />
+                    <div
+                      className="w-[137px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center "
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)",
+                      }}>
+                      Save <br /> 10%
+                    </div>
+                    <div className="w-[192px] h-[120px]">
+                      <Image
+                        width={192}
+                        height={120}
+                        src={product?.image}
+                        alt=""
+                        className="h-full w-full object-fill"
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="w-[192px] h-[120px]">
-              <Image src={img3} alt="" className="h-full w-full object-fill" />
-            </div>
-          </div>
-          <div className="w-[414px] h-[286px] border border-[#0000001C] grid grid-cols-2 p-6 gap-y-5">
-            <div className="">
-              <p className="text-[19px] font-normal text-black">
-                Nintendo Switch{" "}
-              </p>
-              <p className="text-[19px] font-normal text-black">Console</p>
-              <p className="text-[20px] font-normal text-[#00CAD7]">
-                Rs.65,208{" "}
-              </p>
-              <p className="text-[16px] font-normal text-black">
-                Rs.<span className=" line-through">66,000</span>
-              </p>
-            </div>
-
-            <SpecialOffer color="#00CAD7" />
-            <div
-              className="w-[137px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center "
-              style={{
-                background: "linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)",
-              }}>
-              Save <br /> 10%
-            </div>
-            <div className="w-[192px] h-[120px]">
-              <Image src={img5} alt="" className="h-full w-full object-fill" />
-            </div>
-          </div>
-        </div>
+          ))}
       </div>
     </div>
   );

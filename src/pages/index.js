@@ -20,9 +20,9 @@ const HomePage = () => {
       </Head>
       <div className="">
         <Banner />
-        {/* 
+
         <ProductCategory />
-        <NewArrivals arrivalProduct={data} />
+        {/* <NewArrivals arrivalProduct={data} />
         <BestDeal /> */}
       </div>
     </>

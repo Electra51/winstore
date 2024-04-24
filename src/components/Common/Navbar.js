@@ -16,8 +16,12 @@ import {
 import { IoClose } from "react-icons/io5";
 import SocialIcon from "./SocialIcon";
 import { useGetCategoryQuery } from "@/Redux/api/api";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const toggleDrawer = () => {
     console.log("hi");
@@ -195,16 +199,24 @@ const Navbar = () => {
               <select
                 className="w-[127px] h-[39px] rounded-l-md px-2 absolute top-0 left-0 opacity-0 cursor-pointer"
                 defaultValue="placeholder"
-                tabIndex="-1">
+                tabIndex="-1"
+                onChange={(e) => {
+                  const selectedCategory = e.target.value;
+                  if (selectedCategory !== "placeholder") {
+                    router.push(`/products/category/${selectedCategory}`);
+                  }
+                }}>
                 {data &&
                   data.map((category, index) => (
-                    <option className="text-black" key={index}>
+                    <option className="text-black" key={index} value={category}>
                       {category}
                     </option>
                   ))}
               </select>
             </div>
-            <p className="text-[14px]">Home</p>
+            <Link href="/" className="text-[14px]">
+              Home
+            </Link>
             <p className="text-[14px]">Easy Monthly Installments</p>
             <p className="text-[14px]">Shop by Brands</p>
             <p className="text-[14px]">Become a Vendor</p>

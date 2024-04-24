@@ -22,8 +22,8 @@ const HomePage = () => {
         <Banner />
 
         <ProductCategory />
-        {/* <NewArrivals arrivalProduct={data} />
-        <BestDeal /> */}
+        <NewArrivals arrivalProduct={data} />
+        {/* <BestDeal /> */}
       </div>
     </>
   );

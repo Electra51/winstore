@@ -6,7 +6,7 @@ const RootLayout = ({ children }) => {
   return (
     <div>
       <Navbar />
-      <div className="h-[100vh]">{children}</div>
+      {children}
       <Footer />
     </div>
   );

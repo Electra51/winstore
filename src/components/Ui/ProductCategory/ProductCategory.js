@@ -72,7 +72,7 @@ const ProductCategory = () => {
       className="px-4 md:px-8 lg:px-12 xl:px-20 py-6">
       <Slider
         {...settings}
-        className="w-[330px] lg:!w-[1400px] !mx-[auto] px-[20px] lg:!px-[55px] py-6 mb-3">
+        className="w-[330px] lg:!w-[1400px] !mx-[auto] px-[20px] lg:!px-[10px] py-6 mb-3">
         {data?.map((e, i) => {
           return (
             <div>

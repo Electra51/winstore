@@ -9,7 +9,10 @@ import React from "react";
 
 const HomePage = () => {
   const { data, isLoading, isError, error } = useGetProductsQuery();
-  console.log(data);
+
+  {
+    isLoading && <span className="loading loading-spinner loading-lg"></span>;
+  }
   return (
     <>
       <Head>
@@ -20,7 +23,6 @@ const HomePage = () => {
       </Head>
       <div className="">
         <Banner />
-
         <ProductCategory />
         <NewArrivals arrivalProduct={data} />
         <BestDeal />

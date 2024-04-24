@@ -10,7 +10,9 @@ const ProductDetails = () => {
   const { data: products, isLoading } = useGetProductsDetailsQuery(
     router.query.productId
   );
-
+  {
+    isLoading && <span className="loading loading-spinner loading-lg"></span>;
+  }
   return (
     <div className="w-[380px] lg:w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-20 py-10 justify-between items-center">
       <div>

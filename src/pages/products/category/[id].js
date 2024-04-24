@@ -12,6 +12,9 @@ const CategoryDetails = () => {
   const { data: products, isLoading } = useGetProductsByCategoryQuery(
     router.query.id
   );
+  {
+    isLoading && <span className="loading loading-spinner loading-lg"></span>;
+  }
   return (
     <div className="w-[370px] lg:w-[1400px] mx-auto py-16">
       <div className="">

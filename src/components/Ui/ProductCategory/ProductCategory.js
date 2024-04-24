@@ -48,7 +48,9 @@ const ProductCategory = () => {
   };
 
   const { data, isError, isLoading, error } = useGetCategoryQuery();
-
+  {
+    isLoading && <span className="loading loading-spinner loading-lg"></span>;
+  }
   const getImageForCategory = (category) => {
     switch (category) {
       case "electronics":

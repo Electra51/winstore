@@ -14,7 +14,7 @@ const BestDeal = () => {
   const { data: categories } = useGetCategoryQuery();
   const { data: products, isLoading } =
     useGetProductsByCategoryQuery(activeTab);
-
+  //for tab handling
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };

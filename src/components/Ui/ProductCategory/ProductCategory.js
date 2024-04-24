@@ -8,6 +8,7 @@ import img3 from "../../../assets/categoryImage/category3.png";
 import img4 from "../../../assets/categoryImage/category4.png";
 import Image from "next/image";
 import { useGetCategoryQuery } from "@/Redux/api/api";
+import Link from "next/link";
 
 const ProductCategory = () => {
   var settings = {
@@ -74,6 +75,7 @@ const ProductCategory = () => {
         {...settings}
         className="w-[330px] lg:!w-[1400px] !mx-[auto] px-[20px] lg:!px-[10px] py-6 mb-3">
         {data?.map((e, i) => {
+          console.log("e", e);
           return (
             <div>
               <div className="h-[199px] w-[260px] lg:w-[272px] relative">
@@ -89,9 +91,11 @@ const ProductCategory = () => {
                     <p className="text-[25px] text-[#000000] font-normal">
                       {e.charAt(0).toUpperCase() + e.slice(1)}
                     </p>
-                    <p className="text-[21px] text-[#14B1F0] font-normal">
+                    <Link
+                      href={`/products/category/${e}`}
+                      className="text-[21px] text-[#14B1F0] font-normal">
                       Shop
-                    </p>
+                    </Link>
                   </div>
                   <div className="up-arrow"></div>
                 </div>

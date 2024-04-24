@@ -10,8 +10,8 @@ const Footer = () => {
   return (
     <div className="">
       <div className="lg:h-[407px] bg-[#393939]">
-        <div className="w-[389px] lg:w-[1205px] mx-auto pt-[58px] px-10">
-          <div className="flex lg:flex-row flex-col justify-between items-start lg:gap-y-0 gap-y-7">
+        <div className="w-[389px] lg:w-[1205px] mx-auto pt-[58px]">
+          <div className="flex lg:flex-row flex-col justify-between items-start lg:gap-y-0 gap-y-7  px-10">
             <div>
               <Image src={logo} alt="" />
               <p className="text-[18px] font-normal text-[#00CAD7] leading-[17px] mt-[14px]">
@@ -71,11 +71,23 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-start lg:justify-end items-center gap-[11px] mt-8 pb-2">
-            <Image src={img1} alt="" />
-            <Image src={img2} alt="" />
-            <Image src={img3} alt="" />
-            <Image src={img4} alt="" />
+          <div className="flex justify-start lg:justify-end items-center gap-[11px] mt-8 mx-10 pb-2">
+            <div className="h-[55px] w-[97px] rounded-[5px]">
+              {" "}
+              <Image src={img1} alt="" className="h-full w-full object-fill" />
+            </div>
+            <div className="h-[55px] w-[97px] rounded-[5px]">
+              {" "}
+              <Image src={img2} alt="" className="h-full w-full object-fill" />
+            </div>
+            <div className="h-[55px] w-[97px] rounded-[5px]">
+              {" "}
+              <Image src={img3} alt="" className="h-full w-full object-fill" />
+            </div>
+            <div className="h-[55px] w-[97px] rounded-[5px]">
+              {" "}
+              <Image src={img4} alt="" className="h-full w-full object-fill" />
+            </div>
           </div>
         </div>
       </div>

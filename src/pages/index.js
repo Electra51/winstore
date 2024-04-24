@@ -19,8 +19,8 @@ const HomePage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="">
-        {/* <Banner />
-
+        <Banner />
+        {/* 
         <ProductCategory />
         <NewArrivals arrivalProduct={data} />
         <BestDeal /> */}

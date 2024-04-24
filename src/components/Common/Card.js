@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import image1 from "../../assets/banner/banner1.png";
 const Card = ({ data }) => {
   return (
     <div className="w-[186px] h-[287px] border border-[#00000021] p-[14px]">

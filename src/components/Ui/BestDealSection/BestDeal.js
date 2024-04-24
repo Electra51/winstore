@@ -1,7 +1,6 @@
 import SectionHeader from "@/components/Common/SectionHeader";
 import Image from "next/image";
 import React, { useState } from "react";
-import img2 from "../../../assets/hello.png";
 import SpecialOffer from "@/components/Common/SpecialOffer";
 import {
   useGetCategoryQuery,
@@ -11,35 +10,44 @@ import { IoMdStar } from "react-icons/io";
 
 const BestDeal = () => {
   const [activeTab, setActiveTab] = useState("electronics");
-
   const { data: categories } = useGetCategoryQuery();
-
   const { data: products, isLoading } =
     useGetProductsByCategoryQuery(activeTab);
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
+
   return (
-    <div className="w-[1400px] mx-auto mt-[80px] pb-[70px]">
-      <div className="flex justify-between items-center mb-[20px]">
+    <div className="w-[380px] lg:w-[1400px] mx-auto mt-[80px] pb-[70px]">
+      <div className="flex lg:flex-row flex-col justify-between items-start lg:items-center mb-[20px]">
         <SectionHeader title1={"Best"} titile2={"Deals"} />
-        <div className="flex justify-normal items-center gap-6">
-          <div className="flex justify-normal items-center gap-5">
-            {categories?.map((tab) => (
-              <p
-                key={tab}
-                className={`text-[19px] font-normal leading-[56px] cursor-pointer ${
-                  activeTab === tab ? "border-b-2 border-red-500" : ""
-                }`}
-                onClick={() => handleTabClick(tab)}>
-                {tab}
-              </p>
-            ))}
-          </div>
+        <div className="lg:hidden flex justify-normal items-center gap-5 mx-auto w-[340px] overflow-x-auto">
+          {categories?.map((tab) => (
+            <p
+              key={tab}
+              className={`text-[15px] lg:text-[19px] font-normal leading-[56px] cursor-pointer text-nowrap uppercase ${
+                activeTab === tab ? "border-b-2 border-[#00CAD7]" : ""
+              }`}
+              onClick={() => handleTabClick(tab)}>
+              {tab}
+            </p>
+          ))}
+        </div>
+        <div className="hidden lg:flex justify-normal items-center gap-5">
+          {categories?.map((tab) => (
+            <p
+              key={tab}
+              className={`text-[15px] lg:text-[19px] font-normal leading-[56px] cursor-pointer text-nowrap uppercase ${
+                activeTab === tab ? "border-b-2 border-[#00CAD7]" : ""
+              }`}
+              onClick={() => handleTabClick(tab)}>
+              {tab}
+            </p>
+          ))}
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="hidden lg:grid grid-cols-3 gap-4">
         {!isLoading &&
           products?.map((product, index) => (
             <div
@@ -51,15 +59,7 @@ const BestDeal = () => {
                 }`}>
                 {index === 3 ? (
                   <div className="grid grid-cols-2 gap-y-4 p-5">
-                    <SpecialOffer
-                      color={
-                        index === 1 || index === 3
-                          ? "#c93c2d"
-                          : index === 2
-                          ? "#214e54"
-                          : "#00CAD7"
-                      }
-                    />
+                    <SpecialOffer color={index === 3 && "#c93c2d"} />
                     <div
                       className="w-[90px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center rounded-full"
                       style={{
@@ -103,15 +103,7 @@ const BestDeal = () => {
                 ) : index === 1 ? (
                   <div className=" p-5 relative">
                     <div className="absolute top-8 left-8">
-                      <SpecialOffer
-                        color={
-                          index === 1 || index === 3
-                            ? "#c93c2d"
-                            : index === 2
-                            ? "#214e54"
-                            : "#00CAD7"
-                        }
-                      />
+                      <SpecialOffer color={index === 1 && "#c93c2d"} />
                     </div>
                     <div
                       className="w-[141px] h-[143px] text-[24px] leading-[29px] flex justify-center items-center rounded-full absolute top-8 right-8 text-white"
@@ -155,15 +147,7 @@ const BestDeal = () => {
                   </div>
                 ) : index === 4 ? (
                   <div className="grid grid-cols-2 gap-y-4 p-5 relative">
-                    <SpecialOffer
-                      color={
-                        index === 1 || index === 4
-                          ? "#c93c2d"
-                          : index === 2
-                          ? "#214e54"
-                          : "#00CAD7"
-                      }
-                    />
+                    <SpecialOffer color={index === 4 && "#c93c2d"} />
                     <div
                       className="w-[141px] h-[143px] text-[24px] leading-[29px] flex justify-center items-center rounded-full z-10"
                       style={{
@@ -255,6 +239,66 @@ const BestDeal = () => {
                     </div>
                   </div>
                 )}
+              </div>
+            </div>
+          ))}
+      </div>
+
+      <div className="lg:hidden grid grid-cols-1 gap-4">
+        {!isLoading &&
+          products?.map((product, index) => (
+            <div key={index} className={`space-y-3 `}>
+              <div
+                className={`w-[350px] mx-auto border border-[#0000001C] h-[286px]`}>
+                <div className="grid grid-cols-2 gap-y-4 p-5">
+                  <div className="">
+                    {product?.title?.length > 16 ? (
+                      <p className="text-[17px] font-normal text-black">
+                        {product?.title.slice(0, 16) + "..."}
+                      </p>
+                    ) : (
+                      <p className="text-[17px] font-normal text-black">
+                        {product?.title}
+                      </p>
+                    )}
+                    <p className="text-[18px] font-normal text-[#00CAD7]">
+                      Rs.{product?.price}
+                    </p>
+                    <div className="flex justify-normal items-center font-normal text-black">
+                      <IoMdStar className="text-xl text-orange-500" />
+                      <p className="text-[14px]">{product?.rating?.rate} </p>
+                      <span className="text-[14px] pl-0.5">
+                        ({product?.rating?.count} reveiws)
+                      </span>
+                    </div>
+                  </div>
+                  <SpecialOffer
+                    color={
+                      index === 1 || index === 3
+                        ? "#c93c2d"
+                        : index === 2
+                        ? "#214e54"
+                        : "#00CAD7"
+                    }
+                  />
+                  <div
+                    className="w-[137px] h-[91px] text-[24px] leading-[29px] flex justify-center items-center "
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%)",
+                    }}>
+                    Save <br /> 10%
+                  </div>
+                  <div className="w-[140px] h-[120px]">
+                    <Image
+                      width={140}
+                      height={120}
+                      src={product?.image}
+                      alt=""
+                      className="h-full w-full object-fill"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           ))}

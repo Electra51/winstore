@@ -7,6 +7,7 @@ import {
   useGetProductsByCategoryQuery,
 } from "@/Redux/api/api";
 import { IoMdStar } from "react-icons/io";
+import Link from "next/link";
 
 const BestDeal = () => {
   const [activeTab, setActiveTab] = useState("electronics");
@@ -53,7 +54,8 @@ const BestDeal = () => {
             <div
               key={index}
               className={`space-y-3 ${index === 1 ? "row-span-2" : ""}`}>
-              <div
+              <Link
+                href={`/products/${product?.id}`}
                 className={`w-[414px] border border-[#0000001C] ${
                   index === 1 ? "h-[588px]" : "h-[286px]"
                 }`}>
@@ -239,7 +241,7 @@ const BestDeal = () => {
                     </div>
                   </div>
                 )}
-              </div>
+              </Link>
             </div>
           ))}
       </div>
@@ -247,8 +249,9 @@ const BestDeal = () => {
       <div className="lg:hidden grid grid-cols-1 gap-4">
         {!isLoading &&
           products?.map((product, index) => (
-            <div key={index} className={`space-y-3 `}>
-              <div
+            <div key={index} className={`space-y-3`}>
+              <Link
+                href={`/products/${product?.id}`}
                 className={`w-[350px] mx-auto border border-[#0000001C] h-[286px]`}>
                 <div className="grid grid-cols-2 gap-y-4 p-5">
                   <div className="">
@@ -299,7 +302,7 @@ const BestDeal = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
       </div>

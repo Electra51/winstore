@@ -13,6 +13,9 @@ export const apiSlice = createApi({
     getProductsByCategory: builder.query({
       query: (category) => `/products/category/${category}`, // Endpoint to fetch products by category
     }),
+    getProductsDetails: builder.query({
+      query: (product) => `/products/${product}`, // Endpoint to fetch products by category
+    }),
   }),
 });
 
@@ -20,4 +23,5 @@ export const {
   useGetProductsQuery,
   useGetCategoryQuery,
   useGetProductsByCategoryQuery,
+  useGetProductsDetailsQuery,
 } = apiSlice;
